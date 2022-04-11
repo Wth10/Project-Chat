@@ -1,0 +1,28 @@
+const express = require('express');
+const path = require('path');
+
+const App = express();
+const server = require('http').createServer(App);
+const io = require('socket.io')(server);
+
+App.set('views', path.join(__dirname, '../src/views'));
+App.engine('html', require('ejs').renderFile);
+App.set('view engine', 'html');
+
+// ROTAS
+const RouterWeb = require('../routes/RouterWeb');
+App.use('/', RouterWeb);
+
+let messages = []; 
+
+io.on('connection', socket => {
+    console.log(`Usuario Conectado: ${socket.id}`);
+    socket.emit('previusMessages', messages);
+    socket.on('sendMessage', data => {
+        messages.push(data);
+        socket.broadcast.emit('receiveMessage', data);
+    });
+});
+
+const http = 2005;
+server.listen(http, () => console.log(`Server Rodando Na Porta ${http}`));
