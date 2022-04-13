@@ -13,7 +13,7 @@ App.set('view engine', 'html');
 const RouterWeb = require('../routes/RouterWeb');
 App.use('/', RouterWeb);
 
-let messages = []; 
+let messages = [];
 
 io.on('connection', socket => {
     console.log(`Usuario Conectado: ${socket.id}`);
@@ -25,4 +25,4 @@ io.on('connection', socket => {
 });
 
 const http = 2005;
-server.listen(http, () => console.log(`Server Rodando Na Porta ${http}`));
+server.listen(http, () => console.log(`Server Rodando Na Porta: ${http}`));
