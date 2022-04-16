@@ -16,12 +16,12 @@ App.use('/', RouterWeb);
 let messages = [];
 
 io.on('connection', socket => {
-    console.log(`Usuario Conectado: ${socket.id}`);
-    socket.emit('previusMessages', messages);
-    socket.on('sendMessage', data => {
-        messages.push(data);
-        socket.broadcast.emit('receiveMessage', data);
-    });
+	console.log(`Usuario Conectado: ${socket.id}`);
+	socket.emit('previusMessages', messages);
+	socket.on('sendMessage', data => {
+		messages.push(data);
+		socket.broadcast.emit('receiveMessage', data);
+	});
 });
 
 const http = 2005;
