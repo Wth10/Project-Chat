@@ -5,12 +5,8 @@ router.get('/', function (_req, res, _next) {
 	res.render('login');
 });
 
-router.get('/chat', function (_req, res, _next) {
+router.post('/chat', function (_req, res, _next) {
 	res.render('chat');
-});
-
-router.post('/blog', function (_req, res, _next) {
-	res.render('blog');
 });
 
 router.get('*', function (_req, res) {
